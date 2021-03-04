@@ -14,6 +14,7 @@ function SearchResultsItem({ image }) {
   const addToFavorites = () => {
     dispatch({
       type: 'ADD_TO_FAVORITES',
+      // payload:
     });
   };
 
