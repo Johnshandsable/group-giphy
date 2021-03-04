@@ -13,7 +13,7 @@ import App from './components/App/App';
 
 const addFavorite = function* (action) {
   console.log('in addFavorite', action);
-  
+
 }; // end addFavorite
 
 function* rootSaga() {
@@ -42,7 +42,7 @@ const favoriteGiphy = (state = [], action) => {
 const giphyResults = (state = [], action) => {
   switch (action.type) {
     default:
-      return;
+      return state;
   }
 };
 
