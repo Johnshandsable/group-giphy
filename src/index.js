@@ -11,6 +11,25 @@ import axios from 'axios';
 /* Import App */
 import App from './components/App/App';
 
+
+function* searchImages(action) {
+  console.log('searchImages', action);
+  try {
+    let response = yield axios.post('/api/search', action.payload);
+    console.log('response', response.data);
+    yield put({
+      type:'SET_IMAGES',
+      payload: response.data
+    })
+  }
+  catch(err) {
+    console.log('error in search', err);
+  }
+}
+
+function* rootSaga() {
+  yield takeEvery('SEARCH_IMAGES', searchImages);
+}
 const addFavorite = function* (action) {
   console.log('in addFavorite', action);
 
@@ -68,6 +87,8 @@ const favoriteGiphy = (state = [], action) => {
 
 const giphyResults = (state = [], action) => {
   switch (action.type) {
+    case ('SET_IMAGES'):
+      return [...state, ...action.payload]
     default:
       return state;
   }
