@@ -3,12 +3,11 @@ import {useSelector} from 'react-redux';
 const FavoriteView = function () {
 
   // get the redux state to a local variable
-  // look at name from store, may change
-  const favoriteList = useSelector(store => store.favorite);
+  const favoriteList = useSelector(store => store.favoriteGiphy);
 
   return (
     <div className='all_favorites'>
-      
+
       {favoriteList.map(favorite => {
         <div className="individ_favorite">
           <img src={favorite.url} />

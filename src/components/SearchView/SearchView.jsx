@@ -8,12 +8,14 @@ function SearchView() {
 
   const [searchQuery, setSearchQuery] = useState('');
 
-  const handleSearch = () => {
+  const handleSearch = (event) => {
+    event.preventDefault();
     console.log('search clicked', searchQuery);
     dispatch({
-      type: '',
+      type: 'SEARCH_IMAGES',
       payload: searchQuery,
     });
+    setSearchQuery('');
   };
 
   return (
@@ -23,7 +25,7 @@ function SearchView() {
           type="text"
           placeholder="Search..."
           value={searchQuery}
-          onChange={setSearchQuery}
+          onChange={(event) => setSearchQuery(event.target.value)}
         />
         <input type="submit" value="Search" />
       </form>
