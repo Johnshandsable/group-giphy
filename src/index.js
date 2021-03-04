@@ -15,6 +15,15 @@ function* rootSaga() {}
 
 const sagaMiddleware = createSagaMiddleware();
 
+const favoriteGiphy = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_FAVORITE':
+      return [...state, action.payload];
+    default:
+      return state;
+  }
+}
+
 const giphyResults = (state = [], action) => {
   switch (action.type) {
     default:
@@ -25,6 +34,7 @@ const giphyResults = (state = [], action) => {
 const store = createStore(
   combineReducers({
     giphyResults,
+    favoriteGiphy
   }),
   applyMiddleware(sagaMiddleware, logger)
 );
