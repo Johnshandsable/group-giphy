@@ -9,6 +9,17 @@ CREATE TABLE "category" (
     "name" VARCHAR (100) NOT NULL
 );
 
--- Default categories. You may change them :)
+-- favorite gifs table 
+CREATE TABLE "favorite_gifs" (
+	"id" SERIAL PRIMARY KEY, 
+	"image_url" VARCHAR(1024) NOT NULL
+);
+
+-- junction table 
+CREATE TABLE "favorite_gifs_category" (
+	"id" SERIAL PRIMARY KEY, 
+	"favorite_gif_id" INT REFERENCES "favorite_gifs", 
+	"category_id" INT REFERENCES "category" );
+
 INSERT INTO "category" ("name")
 VALUES ('funny'), ('cohort'), ('cartoon'), ('nsfw'), ('meme');
