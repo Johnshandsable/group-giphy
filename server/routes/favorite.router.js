@@ -5,6 +5,17 @@ const router = express.Router();
 
 // return all favorite images
 router.get('/', (req, res) => {
+  console.log('SERVER - GET inside /api/favorite');
+  const sqlText = 'SELECT * FROM "favorite_gifs"';
+  pool
+    .query(sqlText)
+    .then((dbRes) => {
+      res.send(dbRes.rows);
+    })
+    .catch((err) => {
+      console.error('an error occurred inside /api/favorite', err);
+    });
+
   res.sendStatus(200);
 });
 
