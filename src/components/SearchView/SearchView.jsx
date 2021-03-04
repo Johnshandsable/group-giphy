@@ -10,7 +10,8 @@ function SearchView() {
   const handleSearch = () => {
     console.log('search clicked', searchQuery);
     dispatch({
-      type: ''
+      type: '',
+      payload: searchQuery
     })
   }
 
