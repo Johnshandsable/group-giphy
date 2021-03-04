@@ -85,10 +85,10 @@ const favoriteGiphy = (state = [], action) => {
   }
 };
 
-const giphyResults = (state = dragonList, action) => {
+const giphyResults = (state = [], action) => {
   switch (action.type) {
     case 'SET_IMAGES':
-      return [...state, ...action.payload];
+      return action.payload;
     default:
       return state;
   }

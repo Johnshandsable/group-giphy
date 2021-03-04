@@ -20,7 +20,7 @@ function SearchResultsItem({ image }) {
 
   return (
     <div className="search-result-image">
-      <img src={image} alt="random gif" />
+      <img src={image.images.original.url} alt="random gif" />
       <button onClick={addToFavorites}>Favorite</button>
     </div>
   );
