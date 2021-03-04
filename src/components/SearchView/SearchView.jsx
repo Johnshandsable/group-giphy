@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-function SearchView() {
+import SearchResults from '../SearchResults/SearchResults';
 
+function SearchView() {
   const dispatch = useDispatch();
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -12,17 +13,26 @@ function SearchView() {
     console.log('search clicked', searchQuery);
     dispatch({
       type: 'SEARCH_IMAGES',
-      payload: searchQuery
-    })
+      payload: searchQuery,
+    });
     setSearchQuery('');
-  }
+  };
 
-  return(
-    <form onSubmit={handleSearch}>
-      <input type='text' placeholder='Search...' value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} />
-      <input type='submit' value="Search"/> 
-    </form>
-  )
+  return (
+    <div>
+      <form onSubmit={handleSearch}>
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={(event) => setSearchQuery(event.target.value)}
+        />
+        <input type="submit" value="Search" />
+      </form>
+
+      <SearchResults />
+    </div>
+  );
 }
 
 export default SearchView;
