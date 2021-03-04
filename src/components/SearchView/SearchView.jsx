@@ -24,8 +24,8 @@ function SearchView() {
           placeholder="Search..."
           value={searchQuery}
           onChange={setSearchQuery}
-        ></input>
-        <input type="submit">Search</input>
+        />
+        <input type="submit" value="Search" />
       </form>
 
       <SearchResults />
