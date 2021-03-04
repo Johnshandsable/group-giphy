@@ -10,10 +10,30 @@ router.get('/', (req, res) => {
   pool
     .query(sqlText)
     .then((dbRes) => {
+      console.log('inside /api/favorite - success');
       res.send(dbRes.rows);
     })
     .catch((err) => {
       console.error('an error occurred inside /api/favorite', err);
+      res.sendStatus(500);
+    });
+});
+
+// returns all favorite images and associated categories
+router.get('/all', (req, res) => {
+  console.log('SERVER - GET inside /api/favorite/all');
+  const sqlText = `SELECT "image_url", "name"
+    FROM "favorite_gifs" 
+    JOIN "favorite_gifs_category" ON "favorite_gifs".id = "favorite_gifs_category".favorite_gif_id
+    JOIN "category" ON "favorite_gifs_category".category_id = "category".id;`;
+  pool
+    .query(sqlText)
+    .then((dbRes) => {
+      console.log('inside /api/favorite/all - success');
+      res.send(dbRes.rows);
+    })
+    .catch((err) => {
+      console.error('inside /api/favorite/all - an error occurred', err);
       res.sendStatus(500);
     });
 });
