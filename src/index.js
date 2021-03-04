@@ -11,14 +11,33 @@ import axios from 'axios';
 /* Import App */
 import App from './components/App/App';
 
-function* rootSaga() {}
+function* addToFavorites(action) {
+  console.log('*** in addToFavorites() ***');
+  console.log('\taction:', action);
+
+  try {
+    yield axios.post('/api/favorite', action.payload);
+
+    // ToDo -> update favorites list
+    yield put({
+      type: '',
+    });
+  } catch (error) {
+    alert('An ERROR occurred during query. Please try again later');
+    console.log('ERROR in POST /:', error);
+  }
+}
+
+function* rootSaga() {
+  yield takeEvery('', addToFavorites);
+}
 
 const sagaMiddleware = createSagaMiddleware();
 
 const giphyResults = (state = [], action) => {
   switch (action.type) {
     default:
-      return;
+      return state;
   }
 };
 
