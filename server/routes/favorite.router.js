@@ -22,12 +22,15 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   console.log('SERVER - POST inside /api/favorite');
   const newImageURL = req.body.image_url;
-  console.log(req.body.image_url);
-  const sqlText = 'INSERT INTO "favorite_gifs" ("image_url") VALUES ($1)';
+  console.log('image.url: ', req.body.image_url);
+  const sqlText = `INSERT INTO "favorite_gifs" 
+                  ("image_url") 
+                  VALUES ($1);`;
+
   pool
     .query(sqlText, [newImageURL])
     .then((dbRes) => {
-      console.table(dbRes);
+      console.log('SERVER - POST - successful');
       res.sendStatus(201);
     })
     .catch((err) => {
@@ -42,8 +45,20 @@ router.put('/:favId', (req, res) => {
 });
 
 // delete a favorite
-router.delete('/', (req, res) => {
-  res.sendStatus(200);
+router.delete('/:id', (req, res) => {
+  console.log('SERVER - DELETE inside /api/favorite');
+  const idToDelete = req.params.id;
+  const sqlText = 'DELETE FROM "favorite_gifs" WHERE id=$1';
+
+  pool
+    .query(sqlText, [idToDelete])
+    .then((dbRes) => {
+      console.log('SERVER - DELETE - successful');
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.error('SERVER - DELETE inside /api/favorite', err);
+    });
 });
 
 module.exports = router;
