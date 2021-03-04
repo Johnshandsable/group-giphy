@@ -14,9 +14,8 @@ router.get('/', (req, res) => {
     })
     .catch((err) => {
       console.error('an error occurred inside /api/favorite', err);
+      res.sendStatus(500);
     });
-
-  res.sendStatus(200);
 });
 
 // add a new favorite
