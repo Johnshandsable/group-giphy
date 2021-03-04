@@ -7,7 +7,7 @@ const FavoriteView = function () {
 
   return (
     <div className='all_favorites'>
-
+      <h2>Favorite GIFs</h2>
       {favoriteList.map(favorite => {
         <div className="individ_favorite">
           <img src={favorite.url} />
