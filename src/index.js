@@ -11,7 +11,22 @@ import axios from 'axios';
 /* Import App */
 import App from './components/App/App';
 
-function* rootSaga() {}
+const addFavorite = function* (action) {
+  console.log('in addFavorite', action);
+  
+}; // end addFavorite
+
+function* rootSaga() {
+
+  try {
+    // listen for this and do function
+    yield takeEvery('ADD_TO_FAVORITES', addFavorite)
+  }
+  catch (err) {
+    console.error(err);
+  }; // end try catch block
+
+}; // end rootSaga
 
 const sagaMiddleware = createSagaMiddleware();
 
