@@ -6,12 +6,15 @@ import SearchView from '../SearchView/SearchView';
 import './App.css';
 import Nav from '../Nav/Nav';
 
+// MATERIAL UI
+import DataGrid from '@material-ui/core';
+
 function App(props) {
   return (
-    <div>    
+    <div>
       <Router>
-      <Nav />
-      <h1>Giphy Search!</h1>
+        <Nav />
+
         <Route exact path="/search">
           <SearchView />
         </Route>
@@ -19,7 +22,6 @@ function App(props) {
           <FavoriteView />
         </Route>
       </Router>
-      
     </div>
   );
 }
