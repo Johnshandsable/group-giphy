@@ -24,6 +24,15 @@ const FavoriteView = function () {
 
   }; // end getFavorites
 
+  const unFavorite = function (e) {
+    console.log(e.target.id);
+
+    dispatch({
+      type: 'DELETE_FAVORITE',
+      payload: e.target.id
+    })
+  }
+
 
   return (
     <div className='all_favorites'>
@@ -32,6 +41,7 @@ const FavoriteView = function () {
         return (
         <div key={favorite.id}className="individ_favorite">
           <img src={favorite.image_url} />
+          <button id={favorite.id} onClick={unFavorite}>Delete</button>
         </div>
         )
       })}
