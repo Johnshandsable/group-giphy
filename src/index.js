@@ -69,7 +69,33 @@ const getFavorite = function* (action) {
 
 function* setCategory(action) {
   console.log('set category action', action.payload)
+  try{
+    yield axios.put(`/api/favorite/${action.payload.id}`, action.payload)
+    yield put({
+      type: 'GET_FAVORITE'
+    });
+  }
+  catch(err) {
+    console.log('error in setCategory', err);
+  }
 }
+
+const deleteFavorite = function* (action) {
+  try {
+    // send delete to server
+    yield axios.delete(`/api/favorite/${action.payload}`)
+
+    // re-get the favorite list
+    yield put({
+      type: 'GET_FAVORITE'
+    });
+  }
+  catch (err) {
+    console.error(err);
+  }; // end try catch
+
+}; // end deleteFavorite
+
 
 function* rootSaga() {
   // listen for this and do function
@@ -80,6 +106,8 @@ function* rootSaga() {
   yield takeEvery('SEARCH_IMAGES', searchImages);
 
   yield takeEvery('SET_CATEGORY', setCategory);
+
+  yield takeEvery('DELETE_FAVORITE', deleteFavorite);
 } // end rootSaga
 
 const sagaMiddleware = createSagaMiddleware();
