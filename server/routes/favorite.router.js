@@ -61,15 +61,26 @@ router.post('/', (req, res) => {
 // update given favorite with a category id
 router.put('/:favId', (req, res) => {
   // req.body should contain a category_id to add to this favorite image
-  res.sendStatus(200);
+  console.log('req body', req.body);
+  const queryArgs = [req.body.id, req.body.category]
+  const sqlQuery = `INSERT INTO "favorite_gifs_category" ("favorite_gif_id", "category_id")
+  VALUES ($1, $2);`;
+  pool
+    .query(sqlQuery, queryArgs)
+    .then(dbRes => {
+      res.sendStatus(200);
+    })
+    .catch(err => {
+      console.log('error in put', err);
+      res.sendStatus(500);
+    })
 });
 
 // delete a favorite
 router.delete('/:id', (req, res) => {
   console.log('SERVER - DELETE inside /api/favorite');
   const idToDelete = req.params.id;
-  const sqlText = 'DELETE FROM "favorite_gifs" WHERE id=$1';
-
+  const sqlText = `DELETE FROM "favorite_gifs_category" AND DELETE FROM "favorite_gifs" WHERE "favorite_gif_id"=$1 && "favorite_gif".id=$1;`;
   pool
     .query(sqlText, [idToDelete])
     .then((dbRes) => {

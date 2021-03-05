@@ -4,8 +4,10 @@ import { useDispatch } from 'react-redux';
 
 // MATERIAL UI
 import { Button, Grid, Typography } from '@material-ui/core';
+import FavoriteViewItem from '../FavoriteViewItem/FavoriteViewItem';
 
 const FavoriteView = function () {
+
   const dispatch = useDispatch();
 
   // get the redux state to a local variable
@@ -19,6 +21,7 @@ const FavoriteView = function () {
 
   const getFavorites = function () {
     dispatch({
+
       type: 'GET_FAVORITE',
     });
   }; // end getFavorites
@@ -32,6 +35,10 @@ const FavoriteView = function () {
     });
   };
 
+      type: 'GET_FAVORITE'
+    }); 
+  }; // end getFavorites
+
   return (
     <>
       <div className="spacing"></div>
@@ -43,19 +50,10 @@ const FavoriteView = function () {
         justify="center"
         alignItems="center"
       >
-        {favoriteList.map((favorite) => {
-          return (
-            <>
-              <img
-                className="search-result-image"
-                key={favorite.id}
-                src={favorite.image_url}
-              />
-              <button id={favorite.id} onClick={unFavorite}>
-                Delete
-              </button>
-            </>
-          );
+        {favoriteList.map(favorite => {
+        return (
+          <FavoriteViewItem key={favorite.id} favorite={favorite}/>
+        )
         })}
       </Grid>
     </>

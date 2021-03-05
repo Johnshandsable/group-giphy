@@ -67,6 +67,19 @@ const getFavorite = function* (action) {
   }
 }; // end getFavorite
 
+function* setCategory(action) {
+  console.log('set category action', action.payload)
+  try{
+    yield axios.put(`/api/favorite/${action.payload.id}`, action.payload)
+    yield put({
+      type: 'GET_FAVORITE'
+    });
+  }
+  catch(err) {
+    console.log('error in setCategory', err);
+  }
+}
+
 const deleteFavorite = function* (action) {
   try {
     // send delete to server
@@ -91,6 +104,8 @@ function* rootSaga() {
   yield takeEvery('GET_FAVORITE', getFavorite);
 
   yield takeEvery('SEARCH_IMAGES', searchImages);
+
+  yield takeEvery('SET_CATEGORY', setCategory);
 
   yield takeEvery('DELETE_FAVORITE', deleteFavorite);
 } // end rootSaga
