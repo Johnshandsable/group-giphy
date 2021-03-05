@@ -67,6 +67,10 @@ const getFavorite = function* (action) {
   }
 }; // end getFavorite
 
+function* setCategory(action) {
+  console.log('set category action', action.payload)
+}
+
 function* rootSaga() {
   // listen for this and do function
   yield takeEvery('ADD_TO_FAVORITES', addFavorite);
@@ -74,6 +78,8 @@ function* rootSaga() {
   yield takeEvery('GET_FAVORITE', getFavorite);
 
   yield takeEvery('SEARCH_IMAGES', searchImages);
+
+  yield takeEvery('SET_CATEGORY', setCategory);
 } // end rootSaga
 
 const sagaMiddleware = createSagaMiddleware();
