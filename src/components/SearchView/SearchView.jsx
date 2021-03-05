@@ -3,6 +3,15 @@ import { useDispatch } from 'react-redux';
 
 import SearchResults from '../SearchResults/SearchResults';
 
+// MATERIAL UI
+import {
+  Button,
+  Box,
+  Input,
+  InputLabel,
+  FormHelperText,
+} from '@material-ui/core';
+
 function SearchView() {
   const dispatch = useDispatch();
 
@@ -18,16 +27,31 @@ function SearchView() {
     setSearchQuery('');
   };
 
+  /*
+    <InputLabel htmlFor="my-input">Email address</InputLabel>
+    <Input id="my-input" aria-describedby="my-helper-text" />
+    <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText>
+  */
+
   return (
     <div>
       <form onSubmit={handleSearch}>
-        <input
+        <Box paddingTop={3} />
+        <Input
+          aria-describedby="helper-text"
           type="text"
+          margin="dense"
           placeholder="Search..."
           value={searchQuery}
           onChange={(event) => setSearchQuery(event.target.value)}
         />
-        <input type="submit" value="Search" />
+        <FormHelperText id="helper-text">
+          Search for any Gif that comes to your mind
+        </FormHelperText>
+        <Box paddingTop={3} />
+        <Button color="primary" variant="outlined" type="submit">
+          Submit
+        </Button>
       </form>
 
       <SearchResults />

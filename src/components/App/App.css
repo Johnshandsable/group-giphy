@@ -9,5 +9,13 @@ ul {
 
 .spacing {
   margin-top: 90px;
-  border: 1px solid black;
+}
+
+form {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 20px;
+  width: 300px;
 }
