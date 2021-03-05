@@ -36,7 +36,6 @@ const FavoriteView = function () {
   return (
     <>
       <div className="spacing"></div>
-      <h2>Favorite GIFs</h2>
       <Grid
         container
         spacing={3}
