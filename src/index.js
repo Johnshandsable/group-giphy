@@ -67,6 +67,23 @@ const getFavorite = function* (action) {
   }
 }; // end getFavorite
 
+const deleteFavorite = function* (action) {
+  try {
+    // send delete to server
+    yield axios.delete(`/api/favorite/${action.payload}`)
+
+    // re-get the favorite list
+    yield put({
+      type: 'GET_FAVORITE'
+    });
+  }
+  catch (err) {
+    console.error(err);
+  }; // end try catch
+
+}; // end deleteFavorite
+
+
 function* rootSaga() {
   // listen for this and do function
   yield takeEvery('ADD_TO_FAVORITES', addFavorite);
@@ -74,6 +91,8 @@ function* rootSaga() {
   yield takeEvery('GET_FAVORITE', getFavorite);
 
   yield takeEvery('SEARCH_IMAGES', searchImages);
+
+  yield takeEvery('DELETE_FAVORITE', deleteFavorite);
 } // end rootSaga
 
 const sagaMiddleware = createSagaMiddleware();
