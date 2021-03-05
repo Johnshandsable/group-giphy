@@ -15,6 +15,8 @@ function App(props) {
       <Router>
         <Nav />
 
+        <div className="spacing"></div>
+
         <Route exact path="/search">
           <SearchView />
         </Route>
