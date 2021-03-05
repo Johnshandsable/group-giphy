@@ -1,27 +1,26 @@
-import {useSelector} from 'react-redux';
-import {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
+// MATERIAL UI
+import { Button, Grid, Typography } from '@material-ui/core';
 
 const FavoriteView = function () {
   const dispatch = useDispatch();
 
   // get the redux state to a local variable
-  const favoriteList = useSelector(store => store.favoriteGiphy);
+  const favoriteList = useSelector((store) => store.favoriteGiphy);
 
-  
   useEffect(() => {
     getFavorites();
   }, []);
 
   console.log('favorite list is', favoriteList);
 
-
   const getFavorites = function () {
-
     dispatch({
-      type: 'GET_FAVORITE'
-    }); 
-
+      type: 'GET_FAVORITE',
+    });
   }; // end getFavorites
 
   const unFavorite = function (e) {
@@ -29,25 +28,38 @@ const FavoriteView = function () {
 
     dispatch({
       type: 'DELETE_FAVORITE',
-      payload: e.target.id
-    })
-  }
-
+      payload: e.target.id,
+    });
+  };
 
   return (
-    <div className='all_favorites'>
+    <>
+      <div className="spacing"></div>
       <h2>Favorite GIFs</h2>
-      {favoriteList.map(favorite => {
-        return (
-        <div key={favorite.id}className="individ_favorite">
-          <img src={favorite.image_url} />
-          <button id={favorite.id} onClick={unFavorite}>Delete</button>
-        </div>
-        )
-      })}
-
-    </div>
-  )
+      <Grid
+        container
+        spacing={3}
+        direction="row"
+        justify="center"
+        alignItems="center"
+      >
+        {favoriteList.map((favorite) => {
+          return (
+            <>
+              <img
+                className="search-result-image"
+                key={favorite.id}
+                src={favorite.image_url}
+              />
+              <button id={favorite.id} onClick={unFavorite}>
+                Delete
+              </button>
+            </>
+          );
+        })}
+      </Grid>
+    </>
+  );
 }; // end favoriteView
 
 export default FavoriteView;
