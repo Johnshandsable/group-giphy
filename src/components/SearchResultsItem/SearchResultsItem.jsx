@@ -23,7 +23,7 @@ function SearchResultsItem({ image }) {
   };
 
   return (
-    <Grid item xs={4}>
+    <Grid item xs={6}>
       <Button
         color="primary"
         variant="outlined"
