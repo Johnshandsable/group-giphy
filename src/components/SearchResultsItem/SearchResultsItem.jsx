@@ -1,6 +1,10 @@
 /* Import Libraries */
 import { useDispatch } from 'react-redux';
 
+// MATERIAL UI
+import { Box, Grid, Button } from '@material-ui/core';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+
 /**
  *Function renders GIPHY image in search results list
  *
@@ -19,10 +23,24 @@ function SearchResultsItem({ image }) {
   };
 
   return (
-    <div className="search-result-image">
-      <img src={image.images.original.url} alt="random gif" />
-      <button onClick={addToFavorites}>Favorite</button>
-    </div>
+    <Grid item xs={6}>
+      <Button
+        color="primary"
+        variant="outlined"
+        onClick={addToFavorites}
+        endIcon={<FavoriteIcon></FavoriteIcon>}
+      >
+        Favorite
+      </Button>
+
+      <Box mb={2} />
+
+      <img
+        className="search-result-image"
+        src={image.images.original.url}
+        alt="random gif"
+      />
+    </Grid>
   );
 }
 
