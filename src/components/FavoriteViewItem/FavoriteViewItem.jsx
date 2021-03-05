@@ -46,7 +46,7 @@ function FavoriteViewItem({favorite}) {
       </select>
         <input type="submit" value="Select Category" />
       </form>
-      <button onClick={unFavorite}>Delete</button>
+      <button type="button" onClick={unFavorite}>Delete</button>
       </div>
     </div>
   )

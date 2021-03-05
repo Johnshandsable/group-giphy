@@ -80,12 +80,18 @@ router.put('/:favId', (req, res) => {
 router.delete('/:id', (req, res) => {
   console.log('SERVER - DELETE inside /api/favorite');
   const idToDelete = req.params.id;
-  const sqlText = `DELETE FROM "favorite_gifs_category" AND DELETE FROM "favorite_gifs" WHERE "favorite_gif_id"=$1 && "favorite_gif".id=$1;`;
+  const sqlText = `DELETE FROM "favorite_gifs_category" WHERE "favorite_gif_id"=$1;`;
   pool
     .query(sqlText, [idToDelete])
     .then((dbRes) => {
       console.log('SERVER - DELETE - successful');
-      res.sendStatus(200);
+      pool.query(`DELETE FROM "favorite_gifs" WHERE "id"=$1;`, [idToDelete])
+      .then(response => {
+        res.sendStatus(200);
+      })
+      .catch(err => {
+        console.log('error deleting from "favorite_gifs"', err);
+      })
     })
     .catch((err) => {
       console.error('SERVER - DELETE inside /api/favorite', err);
