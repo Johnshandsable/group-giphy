@@ -1,6 +1,11 @@
-.search-result-image img {
+.search-result-image {
+  border: 5px solid black;
   height: 300px;
   width: 450px;
+}
+
+.margin-left {
+  margin-left: 20px;
 }
 
 ul {
@@ -16,6 +21,5 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 20px;
   width: 300px;
 }

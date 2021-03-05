@@ -17,21 +17,24 @@ function SearchResults() {
 
   return (
     // Container for search results
-    <Grid
-      container
-      spacing={3}
-      direction="row"
-      justify="center"
-      alignItems="center"
-    >
-      {/* Loop through images to display each and add favorite button */}
-      {giphyResults.map((image, i) => {
-        return (
-          // Individual containers for each search result image
-          <SearchResultsItem key={i} image={image} />
-        );
-      })}
-    </Grid>
+    <>
+      <div className="spacing"></div>
+      <Grid
+        container
+        spacing={3}
+        direction="row"
+        justify="center"
+        alignItems="center"
+      >
+        {/* Loop through images to display each and add favorite button */}
+        {giphyResults.map((image, i) => {
+          return (
+            // Individual containers for each search result image
+            <SearchResultsItem key={i} image={image} />
+          );
+        })}
+      </Grid>
+    </>
   );
 }
 

@@ -11,7 +11,7 @@ import DataGrid from '@material-ui/core';
 
 function App(props) {
   return (
-    <div>
+    <div className="margin-left">
       <Router>
         <Nav />
 
